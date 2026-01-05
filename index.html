@@ -1,22 +1,130 @@
 <!doctype html>
 <html lang="en">
-<link rel="stylesheet" href="assets/styles.css">
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ashkan Samimi</title>
-  <meta name="description" content="Your Name — research and contact." />
+  <meta name="description" content="Ashkan Samimi — researcher at Hans Knöll Institute (HKI), Jena." />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/favicon.png" />
 </head>
 
 <body>
-  <h1>Ashkan Samimi</h1>
-  <img src="IMG_0174.png" alt="Portrait of Ashkan Samimi">
-  <p>
-    I am a researcher at Hans Knöll Institute, Germany.
-  </p>
-  <p>
-    Email: ashkan.samimi@hki-jena.de
-  </p>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">Ashkan Samimi</a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a class="active" href="index.html">About</a>
+        <a href="research.html">Research</a>
+        <a href="cv.html">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <div class="badge">Researcher · Hans Knöll Institute (HKI), Jena</div>
+
+        <h1>
+          Building clearer links between<br />
+          biology and quantitative insight.
+        </h1>
+
+        <p class="lead">
+          I am a researcher at the Hans Knöll Institute (Germany). My work focuses on
+          <span class="accent">[your main topic]</span>, combining
+          <span class="accent">[methods]</span> to understand
+          <span class="accent">[system/problem]</span>.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="research.html">Explore Research</a>
+          <a class="btn" href="cv.html">View CV</a>
+          <a class="btn ghost" href="mailto:ashkan.samimi@hki-jena.de">Email</a>
+        </div>
+
+        <div class="meta">
+          <div class="meta-item">
+            <div class="meta-k">Location</div>
+            <div class="meta-v">Jena, Germany</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-k">Email</div>
+            <div class="meta-v">
+              <a href="mailto:ashkan.samimi@hki-jena.de">ashkan.samimi@hki-jena.de</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Profile photo">
+        <div class="photo-wrap">
+          <img src="IMG_0174.png" alt="Portrait of Ashkan Samimi" />
+        </div>
+
+        <div class="card-body">
+          <div class="card-name">Ashkan Samimi</div>
+          <div class="card-role">Researcher · Hans Knöll Institute</div>
+
+          <div class="card-links">
+            <!-- Replace # with your real links if you have them -->
+            <a href="#" aria-label="Google Scholar">Scholar</a>
+            <a href="#" aria-label="GitHub">GitHub</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>About</h2>
+      <p>
+        Write 3–5 sentences here in a clear, confident style: what you study, how you study it,
+        and why it matters. Keep it concrete (systems, organisms, molecules, models, datasets, etc.).
+      </p>
+    </section>
+
+    <section class="section grid2">
+      <div class="panel">
+        <h3>Current interests</h3>
+        <ul>
+          <li>[Topic / technique 1]</li>
+          <li>[Topic / technique 2]</li>
+          <li>[Topic / technique 3]</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>Open to</h3>
+        <ul>
+          <li>Collaborations in [area]</li>
+          <li>Talks / seminars</li>
+          <li>Research visits</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="fineprint">
+        © <span id="y"></span> Ashkan Samimi · Hans Knöll Institute (HKI), Jena
+      </div>
+      <div class="fineprint">
+        <a href="mailto:ashkan.samimi@hki-jena.de">Email</a>
+        <span class="dot">•</span>
+        <a href="research.html">Research</a>
+        <span class="dot">•</span>
+        <a href="cv.html">CV</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-<a href="research.html">Research</a>
-<a href="cv.html">CV</a>
