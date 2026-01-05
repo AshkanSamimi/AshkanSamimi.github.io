@@ -24,6 +24,23 @@ body{
     linear-gradient(180deg, var(--bg), var(--bg2));
   min-height: 100vh;
 }
+/* Background image layer */
+.bg-image{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(var(--bg-blur));
+  opacity: var(--bg-opacity);
+
+  transform: scale(1.08); /* prevents edge clipping from blur */
+  pointer-events: none;
+}
 
 a{ color: inherit; text-decoration: none; }
 a:hover{ text-decoration: underline; }
