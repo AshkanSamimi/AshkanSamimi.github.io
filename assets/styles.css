@@ -24,6 +24,17 @@ body{
     linear-gradient(180deg, var(--bg), var(--bg2));
   min-height: 100vh;
 }
+body::before{
+  content:"";
+  position: fixed;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(6,10,22,0.65),
+    rgba(6,10,22,0.85)
+  );
+  z-index:-1;
+}
 /* Background image layer */
 .bg-image{
   position: fixed;
