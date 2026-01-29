@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV · Ashkan Samimi</title>
+  <meta name="description" content="Curriculum Vitae of Ashkan Samimi" />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+  <!-- Same background as homepage -->
+  <div
+    class="bg-image"
+    style="
+      --bg-url: url('../assets/s19.tif');
+      --bg-blur: 0px;
+      --bg-opacity: 0.2;
+    "
+  ></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">Ashkan Samimi</a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">About</a>
+        <a href="research.html">Research</a>
+        <a class="active" href="cv.html">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2>Curriculum Vitae</h2>
+
+      <p class="muted-note">
+        The CV is displayed below for on-screen viewing.
+      </p>
+
+      <div class="pdf-frame">
+        <iframe
+          src="assets/cv.pdf#view=FitH&toolbar=0&navpanes=0"
+          title="Ashkan Samimi CV"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <p class="muted-note">
+        If the viewer does not load, you can
+        <a href="assets/AshkanSamimi_CV.pdf">open the PDF directly</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="fineprint">
+        © <span id="y"></span> Ashkan Samimi
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
