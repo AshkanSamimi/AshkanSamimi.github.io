@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ashkan Samimi</title>
+<meta name="description" content="Ashkan Samimi, physicist and engineer at Leibniz-HKI, Jena. Droplet-based microfluidic platforms for the compartmentalized cultivation, screening and isolation of microorganisms.">
+<link rel="canonical" href="https://ashkansamimi.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ashkan Samimi · Droplet microfluidics for microbiology">
+<meta property="og:description" content="Physics and engineering, applied to microbial systems. Droplet microfluidics and optofluidic detection at Leibniz-HKI, Jena.">
+<meta property="og:url" content="https://ashkansamimi.github.io/">
+<meta property="og:image" content="https://ashkansamimi.github.io/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#061117">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<!-- Structured data: links this page to your Scholar / ORCID / LinkedIn profiles for search engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ashkan Samimi",
+  "url": "https://ashkansamimi.github.io/",
+  "image": "https://ashkansamimi.github.io/assets/portrait.jpg",
+  "jobTitle": "Scientific co-worker",
+  "worksFor": { "@type": "ResearchOrganization", "name": "Leibniz Institute for Natural Product Research and Infection Biology – Hans Knöll Institute (Leibniz-HKI)" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Friedrich Schiller University Jena" },
+    { "@type": "ResearchOrganization", "name": "Laser and Plasma Research Institute (LAPRI)" },
+    { "@type": "CollegeOrUniversity", "name": "University of Bonab" }
+  ],
+  "knowsAbout": ["Droplet microfluidics", "Optofluidics", "Photonics", "Microbiology", "Ultra-high-throughput screening"],
+  "sameAs": [
+    "https://scholar.google.com/citations?user=MOuCEE4AAAAJ&hl=en",
+    "https://orcid.org/0000-0002-9014-7465",
+    "https://www.linkedin.com/in/ashkan-samimi-232302105/"
+  ]
+}
+</script>
+
+<style>
+/* ==========================================================================
+   DESIGN PLAN
+   Layout: a deck of full-screen pages. Each section fills the viewport
+   below the header and snaps into place (desktop); dark instrument pages
+   (Hero, PicoScreen, Contact) alternate with light "bench paper" pages.
+   All droplet imagery is generated motion graphics.
+   Colour logic follows fluorescence channels: cyan = reagent A dye,
+   violet = reagent B dye, amber = cells. PicoScreen green is the
+   biotech "hit" signal, used only on the PicoScreen page.
+   ========================================================================== */
+:root{
+  /* Page (light) */
+  --paper:#F3F6F7;
+  --surface:#FFFFFF;
+  --ink:#0D1B24;        /* 16.1:1 on paper */
+  --body:#33454E;       /* 9.2:1 */
+  --muted:#566A73;      /* 5.2:1 */
+  --rule:#D5DEE1;
+  --field:#7A8D94;      /* control borders, 3.2:1 */
+  --teal:#0A6970;       /* links + primary action, 5.9:1 */
+  --on-teal:#FFFFFF;
+  --iris:#4448B0;       /* 6.9:1 */
+  --amber:#E2A23A;      /* fills only */
+  --amber-text:#875400; /* 5.9:1 */
+  --tint-teal:rgb(10 105 112 / .08);
+  --tint-iris:rgb(68 72 176 / .08);
+  --tint-amber:rgb(226 162 58 / .16);
+  --header-bg:rgb(243 246 247 / .88);
+
+  /* Instrument pages (dark in both themes, by design) */
+  --night-rgb:6 17 23;
+  --night:#061117;
+  --night-2:#0B1A21;
+  --night-rule:#1D343D;
+  --on-night:#E6F0F2;        /* 16.5:1 */
+  --on-night-body:#B4C6CB;   /* 10.8:1 */
+  --on-night-muted:#86A0A7;  /* 6.9:1 */
+  --sig-cyan:#4FD8CF;
+  --sig-iris:#9CA1FF;
+  --sig-amber:#F5B947;
+  --sig-green:#3CC48F;       /* PicoScreen signal green, 8.6:1 on night */
+
+  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --max:1180px;
+  --gutter:clamp(16px, 4vw, 40px);
+  --header-h:64px;
+  --page-h:calc(100svh - var(--header-h) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  --radius:6px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A161D; --surface:#10222B; --ink:#E7F0F2; --body:#BCCED3; --muted:#8AA2A9;
+    --rule:#1E3540; --field:#57737D; --teal:#56D2C8; --on-teal:#061117; --iris:#A3A7FF;
+    --amber:#F2B84B; --amber-text:#F2B84B;
+    --tint-teal:rgb(86 210 200 / .08); --tint-iris:rgb(163 167 255 / .08); --tint-amber:rgb(242 184 75 / .14);
+    --header-bg:rgb(10 22 29 / .88);
+    --night:#040C10; --night-rgb:4 12 16;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A161D; --surface:#10222B; --ink:#E7F0F2; --body:#BCCED3; --muted:#8AA2A9;
+  --rule:#1E3540; --field:#57737D; --teal:#56D2C8; --on-teal:#061117; --iris:#A3A7FF;
+  --amber:#F2B84B; --amber-text:#F2B84B;
+  --tint-teal:rgb(86 210 200 / .08); --tint-iris:rgb(163 167 255 / .08); --tint-amber:rgb(242 184 75 / .14);
+  --header-bg:rgb(10 22 29 / .88);
+  --night:#040C10; --night-rgb:4 12 16;
+  color-scheme:dark;
+}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+[hidden]{ display:none !important; }
+html{ scroll-behavior:smooth; scroll-padding-top:var(--header-h); -webkit-text-size-adjust:100%; }
+/* One page at a time: snap on screens big enough to show a whole page */
+@media (min-width: 900px) and (min-height: 620px){ html{ scroll-snap-type:y mandatory; } }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+body{
+  margin:0; background:var(--paper); color:var(--body);
+  font-family:var(--f-body); font-size:1.0625rem; line-height:1.62;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden;
+}
+img{ max-width:100%; display:block; }
+a{ color:var(--teal); text-underline-offset:.18em; text-decoration-thickness:1px; }
+a:hover{ text-decoration-thickness:2px; }
+:focus-visible{ outline:2px solid var(--teal); outline-offset:3px; border-radius:3px; }
+h1,h2,h3{ font-family:var(--f-display); color:var(--ink); font-weight:600; text-wrap:balance; margin:0; }
+h2{ font-size:clamp(1.75rem, min(3.3vw, 5.2vh), 2.75rem); line-height:1.06; letter-spacing:-.022em; font-variation-settings:"opsz" 72; }
+h3{ font-size:1.3rem; line-height:1.2; letter-spacing:-.01em; font-variation-settings:"opsz" 24; }
+p{ margin:0; }
+abbr{ text-decoration:none; }
+.wrap{ max-width:var(--max); margin-inline:auto; padding-inline:var(--gutter); width:100%; }
+.skip{ position:absolute; left:-999px; top:8px; z-index:100; background:var(--ink); color:var(--paper); padding:8px 12px; border-radius:4px; }
+.skip:focus{ left:12px; }
+
+/* ---------- Pages ---------- */
+.page{
+  min-height:var(--page-h); scroll-snap-align:start; scroll-snap-stop:always;
+  display:flex; flex-direction:column; justify-content:center;
+  padding-block:clamp(28px, 6vh, 72px); position:relative;
+}
+.page + .page{ border-top:1px solid var(--rule); }
+.page.dark{ border-top:0; }
+.page-head{ display:grid; gap:14px; margin-bottom:clamp(20px, 4vh, 40px); max-width:780px; }
+.page-head p{ font-size:1.08rem; max-width:62ch; }
+
+.eyebrow{
+  font-family:var(--f-mono); font-size:.74rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); display:flex; align-items:center; gap:.7em; margin:0;
+}
+.eyebrow::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--teal); flex:none; }
+.mono{ font-family:var(--f-mono); font-variant-numeric:tabular-nums; }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:.5em; min-height:46px; padding:.7em 1.15em;
+  font:500 .975rem/1 var(--f-body); border-radius:999px; text-decoration:none; cursor:pointer;
+  border:1.5px solid transparent; transition:transform .15s ease, background-color .15s ease, border-color .15s ease;
+}
+.btn:hover{ transform:translateY(-1px); }
+.btn-primary{ background:var(--teal); color:var(--on-teal); }
+.btn-outline{ border-color:var(--field); color:var(--ink); background:transparent; }
+.btn-outline:hover{ border-color:var(--ink); }
+.link-arrow{ font-weight:500; text-decoration:none; color:var(--teal); }
+.link-arrow:hover{ text-decoration:underline; }
+.dark .btn-primary{ background:var(--sig-cyan); color:var(--night); }
+.dark .btn-outline{ border-color:var(--on-night-muted); color:var(--on-night); }
+.dark .btn-outline:hover{ border-color:var(--on-night); }
+.dark .link-arrow{ color:var(--on-night); }
+.dark :focus-visible{ outline-color:var(--sig-cyan); }
+.flow-btn{ font:500 .7rem var(--f-mono); letter-spacing:.06em; color:var(--on-night); background:transparent; border:1px solid var(--night-rule); border-radius:999px; padding:6px 12px; cursor:pointer; min-height:30px; }
+.flow-btn:hover{ border-color:var(--on-night-muted); }
+@media (prefers-reduced-motion: reduce){ .btn{ transition:none; } .btn:hover{ transform:none; } }
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:50; height:var(--header-h);
+  background:var(--header-bg); backdrop-filter:saturate(1.4) blur(12px); -webkit-backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid var(--rule);
+}
+.nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:100%; }
+.brand{ display:flex; align-items:center; gap:10px; color:var(--ink); text-decoration:none; font-family:var(--f-display); font-weight:600; font-size:1.1rem; letter-spacing:-.01em; }
+.brand-mark{ position:relative; width:22px; height:22px; border-radius:50%; flex:none; background:radial-gradient(circle at 36% 32%, #B9F3EE 0 18%, #4FD8CF 46%, #0E6B6E 100%); box-shadow:0 0 0 3px var(--tint-teal); }
+.brand-mark::after{ content:""; position:absolute; left:11px; top:12px; width:7px; height:3px; border-radius:2px; background:var(--sig-amber); transform:rotate(-30deg); }
+.nav-links{ display:flex; align-items:center; gap:clamp(12px, 2vw, 26px); list-style:none; margin:0; padding:0; }
+.nav-links a{ color:var(--muted); text-decoration:none; font-size:.94rem; font-weight:500; padding:6px 0; border-bottom:1.5px solid transparent; }
+.nav-links a:hover, .nav-links a[aria-current="true"]{ color:var(--ink); border-bottom-color:var(--ink); }
+.nav-links .btn{ min-height:38px; padding:.5em 1em; font-size:.9rem; color:var(--ink); border:1.5px solid var(--field); }
+.nav-links .btn:hover{ border-color:var(--ink); }
+.menu-btn{ display:none; }
+@media (max-width: 900px){
+  .menu-btn{ display:inline-flex; align-items:center; min-height:40px; padding:0 14px; border-radius:999px; border:1.5px solid var(--field); background:transparent; color:var(--ink); font:500 .9rem var(--f-body); cursor:pointer; }
+  .nav-links{ position:absolute; left:0; right:0; top:100%; flex-direction:column; align-items:stretch; gap:0; background:var(--paper); border-bottom:1px solid var(--rule); padding:8px var(--gutter) 18px; }
+  .nav-links[data-open="false"]{ display:none; }
+  .nav-links a{ display:block; padding:13px 0; border-bottom:1px solid var(--rule); font-size:1.05rem; }
+  .nav-links a:hover, .nav-links a[aria-current="true"]{ border-bottom-color:var(--rule); }
+  .nav-links li:last-child{ padding-top:14px; }
+  .nav-links .btn{ display:flex; justify-content:center; width:100%; }
+}
+
+/* ---------- Page rail (one dot per page) ---------- */
+.rail{
+  position:fixed; right:clamp(10px, 1.6vw, 22px); top:50%; transform:translateY(-50%); z-index:40;
+  display:none; flex-direction:column; gap:10px; padding:10px 7px; list-style:none; margin:0;
+  background:var(--header-bg); border:1px solid var(--rule); border-radius:999px;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+@media (min-width: 900px) and (min-height: 620px){ .rail{ display:flex; } }
+.rail a{ position:relative; display:block; width:10px; height:10px; border-radius:50%; border:1.5px solid var(--field); }
+.rail a:hover{ border-color:var(--ink); }
+.rail a[aria-current="true"]{ background:var(--ink); border-color:var(--ink); }
+.rail a::after{
+  content:attr(data-label); position:absolute; right:22px; top:50%; transform:translateY(-50%);
+  font:500 .68rem var(--f-mono); letter-spacing:.1em; text-transform:uppercase; white-space:nowrap;
+  color:var(--ink); background:var(--header-bg); border:1px solid var(--rule); padding:3px 8px; border-radius:4px;
+  opacity:0; pointer-events:none; transition:opacity .15s;
+}
+.rail a:hover::after, .rail a:focus-visible::after{ opacity:1; }
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{ isolation:isolate; overflow:hidden; background:var(--night); color:var(--on-night); padding-block:0; justify-content:stretch; }
+.hero-canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:-2; display:block; }
+.hero-scrim{
+  position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgb(var(--night-rgb) / .95) 0%, rgb(var(--night-rgb) / .9) 36%, rgb(var(--night-rgb) / .5) 53%, rgb(var(--night-rgb) / .1) 68%, rgb(var(--night-rgb) / .02) 100%),
+    linear-gradient(0deg, rgb(var(--night-rgb) / .55), transparent 26%);
+}
+.hero-inner{ flex:1; display:grid; grid-template-columns:minmax(0, 1.2fr) minmax(0, .8fr); gap:clamp(40px, 7vw, 120px); align-items:center; padding-block:clamp(24px, 5vh, 72px); }
+.hero-text{ min-width:0; max-width:680px; }
+.hero .eyebrow{ color:var(--on-night-muted); margin-bottom:18px; }
+.hero .eyebrow::before{ background:var(--sig-cyan); box-shadow:0 0 10px var(--sig-cyan); }
+.hero h1{ color:var(--on-night); font-size:clamp(2.1rem, min(3.9vw, 6.6vh), 3.5rem); line-height:1.04; letter-spacing:-.03em; font-variation-settings:"opsz" 96; }
+.hero h1 .h1-sub{ display:block; color:var(--on-night-muted); }
+.hero-lead{ margin-top:clamp(14px, 3vh, 24px); font-size:clamp(1rem, 1.3vw, 1.13rem); line-height:1.6; color:var(--on-night-body); max-width:56ch; }
+.hero-lead em{ font-style:normal; color:var(--on-night); border-bottom:1px solid var(--sig-amber); }
+.cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 14px; margin-top:clamp(18px, 4vh, 32px); }
+.cta-row .link-arrow{ margin-left:6px; }
+.hero-portrait{ margin:0; justify-self:end; display:grid; justify-items:center; gap:18px; }
+.droplet-frame{
+  width:clamp(200px, min(23vw, 38vh), 320px); max-width:100%; aspect-ratio:1; border-radius:50%; overflow:hidden;
+  box-shadow:0 0 0 2px var(--sig-amber), 0 0 0 11px rgb(245 185 71 / .12), 0 0 0 22px rgb(245 185 71 / .05), 0 0 70px 14px rgb(79 216 207 / .18);
+}
+.droplet-frame img{ width:100%; height:100%; max-width:none; object-fit:cover; object-position:50% 40%; }
+.hero-portrait figcaption{ background:rgb(var(--night-rgb) / .8); padding:6px 14px; border-radius:6px; text-align:center; font-family:var(--f-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--on-night-muted); line-height:1.6; }
+.hero-portrait figcaption b{ color:var(--on-night); font-weight:500; }
+.trace-strip{ position:relative; border-top:1px solid var(--night-rule); background:rgb(var(--night-rgb) / .86); }
+.trace-canvas{ display:block; width:100%; height:clamp(56px, 9vh, 78px); }
+.trace-meta{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 24px; padding-block:9px 11px; border-top:1px solid var(--night-rule); font-family:var(--f-mono); font-size:.7rem; letter-spacing:.05em; color:var(--on-night-muted); }
+.legend{ display:flex; flex-wrap:wrap; gap:6px 18px; list-style:none; margin:0; padding:0; }
+.legend li{ display:flex; align-items:center; gap:7px; }
+.legend i{ width:14px; height:2px; border-radius:2px; display:inline-block; }
+.trace-note{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+@media (max-width: 900px){
+  .hero-inner{ grid-template-columns:minmax(0,1fr); gap:24px; padding-right:max(var(--gutter), 52px); }
+  .hero-portrait{ order:-1; justify-self:start; grid-template-columns:auto minmax(0,1fr); align-items:center; justify-items:start; gap:18px; }
+  .droplet-frame{ width:112px; box-shadow:0 0 0 2px var(--sig-amber), 0 0 0 8px rgb(245 185 71 / .12), 0 0 40px 6px rgb(79 216 207 / .18); }
+  .hero-portrait figcaption{ text-align:left; }
+  .cap-fields{ display:none; }
+  .hero-scrim{ background:linear-gradient(90deg, rgb(var(--night-rgb) / .9), rgb(var(--night-rgb) / .78) 80%, rgb(var(--night-rgb) / .55)); }
+}
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.about-grid{ display:grid; grid-template-columns:minmax(0, 1.55fr) minmax(0, 1fr); gap:clamp(40px, 7vw, 104px); align-items:center; }
+.about-grid > *{ min-width:0; }
+.about-grid h2{ max-width:16ch; margin-top:14px; }
+.seg{ display:inline-flex; flex-wrap:wrap; gap:2px; padding:3px; border:1px solid var(--field); border-radius:999px; margin:clamp(16px, 3vh, 26px) 0 clamp(14px, 2.6vh, 22px); }
+.seg button{ font:500 .72rem var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted); background:transparent; border:0; border-radius:999px; padding:.65em 1.05em; cursor:pointer; min-height:34px; }
+.seg button[aria-pressed="true"]{ background:var(--ink); color:var(--paper); }
+.reader{ display:grid; gap:.9em; font-size:clamp(1rem, 2.1vh, 1.1rem); line-height:1.66; max-width:64ch; }
+.reader strong{ color:var(--ink); font-weight:600; }
+.facts{ margin:0; display:grid; border-top:1px solid var(--ink); }
+.facts div{ display:grid; gap:1px; padding:clamp(8px, 1.5vh, 13px) 0; border-bottom:1px solid var(--rule); }
+.facts dt{ font-family:var(--f-mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.facts dd{ margin:0; color:var(--ink); font-size:.98rem; line-height:1.45; }
+.facts dd small{ color:var(--muted); font-size:.9rem; }
+
+/* ==========================================================================
+   RESEARCH: figure + tabbed workflow
+   ========================================================================== */
+.research-grid{ display:grid; grid-template-columns:auto minmax(0, 1fr); gap:clamp(32px, 5vw, 80px); align-items:center; }
+.research-grid > *{ min-width:0; }
+.fig{ margin:0; width:min(44vw, 480px, calc((var(--page-h) - 150px) / 1.32 + 24px)); max-width:100%; }
+.bracket{
+  --c:var(--ink); --l:18px; --w:1.5px; padding:12px;
+  background:
+    linear-gradient(var(--c) 0 0) top left / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c) 0 0) top left / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c) 0 0) top right / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c) 0 0) top right / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c) 0 0) bottom left / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c) 0 0) bottom right / var(--w) var(--l) no-repeat;
+}
+.fig-stage{ background:var(--night); border-radius:2px; }
+.fig-canvas{ display:block; width:100%; max-width:100%; aspect-ratio:100 / 132; cursor:pointer; }
+.fig figcaption{ margin-top:10px; font-family:var(--f-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.fig .flow-btn{ color:var(--ink); border-color:var(--field); }
+.fig .flow-btn:hover{ border-color:var(--ink); }
+.research-copy{ display:grid; gap:14px; }
+.research-copy > p{ font-size:1.05rem; max-width:60ch; }
+.tabs{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); margin-top:clamp(8px, 2vh, 18px); border-bottom:1px solid var(--rule); }
+.tab{
+  text-align:left; background:transparent; border:0; border-bottom:2px solid transparent; margin-bottom:-1px; cursor:pointer;
+  padding:10px 10px 12px 0; font:500 .72rem var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+}
+.tab b{ display:block; font-weight:500; color:var(--teal); font-size:.78rem; margin-bottom:2px; }
+.tab:hover{ color:var(--ink); }
+.tab[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--ink); }
+.tabpanels{ display:grid; min-height:clamp(220px, 32vh, 260px); padding-top:clamp(10px, 2vh, 18px); }
+.tabpanel h3{ margin-bottom:10px; }
+.tabpanel p{ max-width:62ch; }
+.cites{ margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; list-style:none; padding:0; }
+.cites a{
+  display:inline-flex; align-items:center; gap:6px; font-family:var(--f-mono); font-size:.72rem; letter-spacing:.02em;
+  color:var(--ink); text-decoration:none; border:1px solid var(--field); border-radius:999px; padding:5px 12px; background:var(--surface);
+}
+.cites a:hover{ border-color:var(--teal); color:var(--teal); }
+.cites a span{ color:var(--teal); }
+
+/* ==========================================================================
+   PICOSCREEN (dark)
+   ========================================================================== */
+.pico{ background:var(--night); color:var(--on-night-body); overflow:hidden; isolation:isolate; }
+.pico-grid{ display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:clamp(32px, 6vw, 96px); align-items:center; }
+.pico-grid > *{ min-width:0; }
+.pico .eyebrow{ color:var(--on-night-muted); }
+.pico .eyebrow::before{ background:var(--sig-green); box-shadow:0 0 0 4px rgb(60 196 143 / .18), 0 0 12px var(--sig-green); }
+.pico h2{ color:var(--on-night); font-size:clamp(2.4rem, min(5vw, 8vh), 4.4rem); letter-spacing:-.035em; margin-top:16px; }
+.pico .pico-sub{ font-family:var(--f-display); font-size:clamp(1.25rem, 2vw, 1.65rem); line-height:1.25; color:var(--on-night-muted); margin-top:8px; max-width:24ch; font-weight:500; }
+.pico p.pico-body{ margin-top:clamp(16px, 3vh, 24px); font-size:1.08rem; max-width:52ch; }
+.pico .btn-primary{ background:var(--sig-green); color:var(--night); }
+.pico :focus-visible{ outline-color:var(--sig-green); }
+.pico-cta{ margin-top:clamp(20px, 4vh, 32px); display:flex; flex-wrap:wrap; gap:12px; }
+.pico-fig{ margin:0; display:grid; gap:10px; justify-items:center; }
+.pico-canvas{ display:block; width:min(42vw, 560px, calc(var(--page-h) - 120px)); max-width:100%; aspect-ratio:1; }
+.pico-fig figcaption{ font-family:var(--f-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--on-night-muted); display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center; }
+
+/* ==========================================================================
+   PUBLICATIONS
+   ========================================================================== */
+.pub-head{ display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:16px 32px; margin-bottom:clamp(16px, 3vh, 28px); }
+.pub-head > div:first-child{ display:grid; gap:14px; }
+.pub-head .chips{ flex:1 1 480px; justify-content:flex-end; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.chip{ font:500 .78rem var(--f-body); color:var(--body); background:transparent; border:1px solid var(--field); border-radius:999px; padding:.45em .95em; cursor:pointer; min-height:34px; }
+.chip:hover{ border-color:var(--ink); color:var(--ink); }
+.chip[aria-pressed="true"]{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.count{ font-family:var(--f-mono); font-size:.72rem; letter-spacing:.08em; color:var(--muted); }
+.pubs{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap:0 clamp(20px, 2.6vw, 36px); border-top:1px solid var(--ink); }
+.pubs li{ display:grid; align-content:start; gap:4px; padding:clamp(10px, 1.7vh, 16px) 0; border-bottom:1px solid var(--rule); }
+.pub-src{ font-family:var(--f-mono); font-size:.7rem; letter-spacing:.06em; color:var(--muted); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.pub-src b{ color:var(--ink); font-weight:500; }
+.pub-title{ font-family:var(--f-display); font-variation-settings:"opsz" 20; font-weight:500; font-size:.98rem; line-height:1.3; color:var(--ink); text-decoration:none; }
+.pub-title:hover{ text-decoration:underline; color:var(--teal); }
+.pub-title span{ color:var(--teal); font-family:var(--f-body); }
+.pub-authors{ font-size:.82rem; line-height:1.42; color:var(--muted); }
+.pub-authors b{ color:var(--ink); font-weight:600; }
+.tag{ font-family:var(--f-mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); border:1px solid var(--rule); border-radius:3px; padding:1px 6px; }
+.tag.first{ color:var(--iris); border-color:currentColor; }
+.pub-more{ margin-top:clamp(14px, 2.4vh, 22px); display:flex; flex-wrap:wrap; gap:10px 24px; }
+
+/* ==========================================================================
+   CAREER
+   ========================================================================== */
+.timeline{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); position:relative; }
+.timeline::before{ content:""; position:absolute; left:0; right:0; top:15px; height:14px; border-top:1px solid var(--field); border-bottom:1px solid var(--field); background:linear-gradient(90deg, var(--tint-teal), var(--tint-iris)); }
+.timeline li{ position:relative; padding:52px 26px 0 0; min-width:0; }
+.drop{ position:absolute; top:10px; left:0; width:24px; height:24px; border-radius:50%; background:var(--surface); border:1.5px solid var(--ink); }
+.timeline li.now .drop{ background:var(--amber); border-color:var(--amber); box-shadow:0 0 0 6px var(--tint-amber), 0 0 0 12px var(--tint-amber); }
+.when{ font-family:var(--f-mono); font-size:.76rem; letter-spacing:.04em; color:var(--muted); font-variant-numeric:tabular-nums; }
+.now .when{ color:var(--amber-text); }
+.timeline h3{ font-size:1.14rem; margin:6px 0 4px; }
+.where{ color:var(--ink); font-size:.95rem; line-height:1.42; }
+.what{ margin-top:8px; font-size:.92rem; color:var(--muted); line-height:1.5; }
+.awards{ margin-top:clamp(28px, 5vh, 56px); }
+.awards h3{ font-size:1.1rem; margin-bottom:10px; }
+.awards ul{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0 clamp(20px, 3vw, 48px); border-top:1px solid var(--ink); }
+.awards li{ display:grid; grid-template-columns:7.5rem minmax(0,1fr); gap:2px 16px; padding:10px 0; border-bottom:1px solid var(--rule); color:var(--ink); font-size:.95rem; line-height:1.45; }
+.awards li span:first-child{ font-family:var(--f-mono); font-size:.72rem; color:var(--muted); padding-top:.2em; }
+.awards li small{ color:var(--muted); font-size:.88rem; }
+
+/* ==========================================================================
+   METHODS
+   ========================================================================== */
+.kit{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:0 clamp(24px, 4vw, 56px); }
+.kit > div{ border-top:1px solid var(--ink); padding:clamp(12px, 2.4vh, 20px) 0 clamp(18px, 3.6vh, 32px); min-width:0; }
+.kit h3{ font-family:var(--f-mono); font-size:.74rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.kit ul{ list-style:none; margin:0; padding:0; display:grid; gap:5px; color:var(--ink); }
+.kit li small{ color:var(--muted); font-size:.9rem; }
+
+/* ==========================================================================
+   CONTACT (dark) + footer
+   ========================================================================== */
+.contact{ background:var(--night); color:var(--on-night-body); overflow:hidden; isolation:isolate; padding-bottom:0; }
+.contact-canvas{
+  position:absolute; inset:0; width:100%; height:100%; z-index:-1; display:block;
+  -webkit-mask-image:linear-gradient(90deg, transparent 48%, rgb(0 0 0 / .55) 75%, #000);
+          mask-image:linear-gradient(90deg, transparent 48%, rgb(0 0 0 / .55) 75%, #000);
+}
+.contact-inner{ flex:1; display:grid; align-content:center; gap:clamp(14px, 2.6vh, 22px); }
+.contact-inner > *{ max-width:660px; }
+.contact .eyebrow{ color:var(--on-night-muted); }
+.contact .eyebrow::before{ background:var(--sig-amber); box-shadow:0 0 10px var(--sig-amber); }
+.contact h2{ color:var(--on-night); font-size:clamp(2rem, min(4.2vw, 6.6vh), 3.4rem); }
+.contact p{ max-width:56ch; font-size:1.08rem; }
+.email-row{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px; }
+.email{ font-family:var(--f-mono); font-size:clamp(1rem, 2.2vw, 1.3rem); color:var(--on-night); user-select:all; border-bottom:1px solid var(--sig-cyan); padding-bottom:2px; overflow-wrap:anywhere; }
+.copy-btn{ font:500 .75rem var(--f-mono); letter-spacing:.08em; color:var(--on-night); background:transparent; border:1px solid var(--night-rule); border-radius:999px; padding:7px 13px; cursor:pointer; min-height:34px; }
+.copy-btn:hover{ border-color:var(--on-night-muted); }
+.profiles{ display:flex; flex-wrap:wrap; gap:10px; }
+.address{ font-size:.92rem; color:var(--on-night-muted); font-style:normal; line-height:1.6; }
+.site-footer{ margin-top:clamp(24px, 5vh, 56px); border-top:1px solid var(--night-rule); background:rgb(var(--night-rgb) / .7); color:var(--on-night-muted); font-size:.88rem; }
+.footer-inner{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px 24px; padding-block:18px; }
+.footer-inner a{ color:var(--on-night); }
+
+/* ---------- Short desktop screens: tighten vertical rhythm so each page still fits ---------- */
+@media (min-width: 900px) and (max-height: 800px){
+  .page{ padding-block:clamp(16px, 3vh, 28px); }
+  .page-head{ margin-bottom:14px; gap:10px; }
+  .about-grid h2, .research-copy h2{ font-size:clamp(1.6rem, 4.6vh, 2.3rem); }
+  .reader{ gap:.7em; line-height:1.58; }
+  .research-copy{ gap:10px; }
+  .tabpanels{ min-height:190px; }
+  .tabpanel p{ font-size:1rem; line-height:1.55; }
+  .timeline li{ padding-top:46px; }
+  .timeline h3{ font-size:1.05rem; }
+  .awards{ margin-top:18px; }
+  .awards li{ padding:6px 0; font-size:.9rem; }
+  .pubs li{ padding:8px 0; }
+  .pub-more{ margin-top:10px; }
+  .pico-canvas{ width:min(42vw, 560px, calc(var(--page-h) - 90px)); }
+  .site-footer{ margin-top:16px; }
+  .footer-inner{ padding-block:12px; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px){
+  .research-grid{ grid-template-columns:minmax(0,1fr); }
+  .fig{ width:min(100%, 420px); order:2; }
+  .pico-grid{ grid-template-columns:minmax(0,1fr); }
+  .pico-canvas{ width:min(100%, 440px); }
+}
+@media (max-width: 960px){
+  .about-grid{ grid-template-columns:minmax(0,1fr); }
+  .kit{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .timeline{ grid-template-columns:repeat(2, minmax(0,1fr)); row-gap:36px; }
+  .timeline::before{ display:none; }
+  .timeline li{ border-top:1px solid var(--field); padding-top:44px; }
+  .drop{ top:-12px; }
+  .awards ul{ grid-template-columns:minmax(0,1fr); }
+}
+@media (max-width: 620px){
+  .tabs{ grid-template-columns:minmax(0,1fr); border-bottom:0; }
+  .tab{ border-bottom:1px solid var(--rule); border-left:2px solid transparent; padding-left:10px; margin:0; }
+  .tab[aria-selected="true"]{ border-left-color:var(--ink); border-bottom-color:var(--rule); }
+  .kit{ grid-template-columns:minmax(0,1fr); }
+  .awards li{ grid-template-columns:minmax(0,1fr); }
+  .timeline{ grid-template-columns:minmax(0,1fr); row-gap:0; padding-left:34px; }
+  .timeline::before{ display:block; left:5px; right:auto; top:8px; bottom:8px; width:14px; height:auto; border:0; border-left:1px solid var(--field); border-right:1px solid var(--field); background:linear-gradient(180deg, var(--tint-teal), var(--tint-iris)); }
+  .timeline li{ border-top:0; padding:0 0 30px; }
+  .drop{ top:2px; left:-34px; }
+  .contact-canvas{ -webkit-mask-image:linear-gradient(180deg, rgb(0 0 0 / .4), rgb(0 0 0 / .08) 60%); mask-image:linear-gradient(180deg, rgb(0 0 0 / .4), rgb(0 0 0 / .08) 60%); }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Ashkan Samimi, back to top"><span class="brand-mark" aria-hidden="true"></span>Ashkan Samimi</a>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links" data-open="false">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#picoscreen">PicoScreen</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="btn btn-outline" href="cv.html">CV</a></li>
+    </ul>
+  </div>
+</header>
+
+<nav aria-label="Pages">
+  <ul class="rail" id="rail">
+    <li><a href="#top" data-label="Home" aria-label="Home"></a></li>
+    <li><a href="#about" data-label="About" aria-label="About"></a></li>
+    <li><a href="#research" data-label="Research" aria-label="Research"></a></li>
+    <li><a href="#picoscreen" data-label="PicoScreen" aria-label="PicoScreen"></a></li>
+    <li><a href="#publications" data-label="Publications" aria-label="Publications"></a></li>
+    <li><a href="#career" data-label="Career" aria-label="Career"></a></li>
+    <li><a href="#methods" data-label="Methods" aria-label="Methods"></a></li>
+    <li><a href="#contact" data-label="Contact" aria-label="Contact"></a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+  <!-- ================= 1 · HERO ================= -->
+  <section class="page dark hero" id="top" aria-labelledby="hero-title">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Ashkan Samimi · Leibniz-HKI, Jena</p>
+        <h1 id="hero-title">Physics and engineering, <span class="h1-sub">applied to microbial systems.</span></h1>
+        <p class="hero-lead">
+          I develop droplet-based microfluidic platforms for the compartmentalized cultivation, phenotypic screening and isolation of microorganisms in picoliter-volume droplets.
+          A current focus is <em>microbial dark matter</em>: the large fraction of microbial diversity not yet brought into axenic culture.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Propose a collaboration</a>
+          <a class="btn btn-outline" href="#research">Research program</a>
+          <a class="link-arrow" href="cv.html">Curriculum vitae →</a>
+        </div>
+      </div>
+      <figure class="hero-portrait">
+        <div class="droplet-frame">
+          <img src="assets/portrait.jpg" width="720" height="720" alt="Portrait of Ashkan Samimi" fetchpriority="high">
+        </div>
+        <figcaption><b>Scientific co&#8209;worker · Leibniz&#8209;HKI</b><span class="cap-fields"><br>Microfluidics · Photonics · Microbiology</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="trace-strip">
+      <canvas class="trace-canvas" aria-hidden="true"></canvas>
+      <div class="wrap trace-meta">
+        <ul class="legend" aria-label="Trace legend">
+          <li><i style="background:var(--sig-cyan)"></i>Ch 1 · reagent A dye</li>
+          <li><i style="background:var(--sig-iris)"></i>Ch 2 · reagent B dye</li>
+          <li><i style="background:var(--sig-amber)"></i>Ch 3 · cell-associated signal</li>
+        </ul>
+        <div class="trace-note">
+          <span>Fluorescence, a.u. · simulated data</span>
+          <button class="flow-btn" type="button" id="flow-toggle" aria-pressed="false">Pause flow</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2 · ABOUT ================= -->
+  <section class="page" id="about" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">From laser physics to microbiology.</h2>
+        <div class="seg" role="group" aria-label="Choose the summary">
+          <button type="button" id="read-tech" aria-pressed="true" data-reader="tech">Technical summary</button>
+          <button type="button" id="read-plain" aria-pressed="false" data-reader="plain">Lay summary</button>
+        </div>
+        <div class="reader" data-version="tech">
+          <p>I am an interdisciplinary scientist trained in <strong>physics and engineering</strong> (BSc Laser and Optics Engineering; MSc Photonics), with expertise in <strong>microfluidics and photonics</strong>. During my doctoral research at Leibniz-HKI and Friedrich Schiller University Jena, I moved into microbiology and developed droplet-based microfluidic technologies to address fundamental questions in microbial systems.</p>
+          <p>My work integrates combinatorial droplet generation, optofluidic fluorescence detection and single-droplet recovery into workflows that parallelize microbiological assays at the picoliter scale, from probing antibiotic inhibition in small bacterial populations to the droplet-based cultivation and high-throughput isolation of mouse gut microbiota.</p>
+          <p>To translate these methods into application, I am incubating <strong>PicoScreen</strong>, a start-up concept for ultra-high-throughput screening (<abbr title="ultra-high-throughput screening">uHTS</abbr>) in droplets.</p>
+        </div>
+        <div class="reader" data-version="plain" hidden>
+          <p>Most microbes on Earth have never been grown in a laboratory, so their functions remain largely unknown. I build microfluidic chips whose channels are about as wide as a human hair. They divide a sample into thousands of tiny droplets, and <strong>each droplet acts as an independent test tube.</strong></p>
+          <p>Using optical detection, I measure what happens inside each droplet: which bacteria grow, which antibiotics inhibit them, and which microbes produce useful compounds. Droplets of interest are then recovered for further analysis.</p>
+          <p>My training is in physics, and I apply that quantitative approach to biology.</p>
+        </div>
+      </div>
+      <dl class="facts">
+        <div><dt>Current position</dt><dd>Scientific co-worker, Leibniz-HKI <small>· since 01/2025</small></dd></div>
+        <div><dt>Doctoral research</dt><dd>Friedrich Schiller University Jena &amp; Leibniz-HKI <small>· 2020–2024</small></dd></div>
+        <div><dt>Master's degree</dt><dd>Photonics, Laser and Plasma Research Institute (LAPRI), Tehran</dd></div>
+        <div><dt>Bachelor's degree</dt><dd>Laser and Optics Engineering, University of Bonab</dd></div>
+        <div><dt>Languages</dt><dd>English (C1) · German (B1) · Persian (native)</dd></div>
+        <div><dt>Available for</dt><dd>Research collaborations, invited talks, seminars</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= 3 · RESEARCH ================= -->
+  <section class="page" id="research" aria-labelledby="research-title">
+    <div class="wrap research-grid">
+      <figure class="fig">
+        <div class="bracket">
+          <div class="fig-stage">
+            <canvas class="fig-canvas" role="img" aria-label="Animated schematic of a droplet microfluidic workflow. Reagent streams A and B co-flow and are emulsified in oil at a flow-focusing junction; their changing ratio gives each droplet a different composition. Some droplets contain bacterial cells. Droplets pass a laser detection point where their fluorescence is read, and droplets with a positive signal are sorted into a collection outlet."></canvas>
+          </div>
+        </div>
+        <figcaption><span>Fig. 1 · Droplet workflow · schematic, not to scale</span><button class="flow-btn" type="button" id="fig-toggle" aria-pressed="false">Pause</button></figcaption>
+      </figure>
+
+      <div class="research-copy">
+        <p class="eyebrow">Research</p>
+        <h2 id="research-title">Compartmentalized microbiology in picoliter droplets.</h2>
+        <p>Water-in-oil droplets serve as isolated, monodisperse microreactors. My work addresses the three modules required to use them as a quantitative assay platform.</p>
+
+        <div class="tabs" role="tablist" aria-label="Workflow modules">
+          <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" tabindex="0" data-stage="1"><b>01</b>Generation</button>
+          <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" data-stage="2"><b>02</b>Detection</button>
+          <button class="tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1" data-stage="3"><b>03</b>Recovery</button>
+        </div>
+        <div class="tabpanels">
+          <div class="tabpanel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0">
+            <h3>Combinatorial droplet libraries</h3>
+            <p>Microfluidic generation of droplet libraries in which each droplet carries a defined combination of reagent concentrations, indexed by fluorescent dye barcodes. Applied to probing antibiotic inhibition in small bacterial populations.</p>
+            <ul class="cites" aria-label="Related publications">
+              <li><a href="https://www.sciencedirect.com/science/article/pii/S092540052400892X">Samimi et al., Sens. Actuators B Chem. 2024 <span>↗</span></a></li>
+              <li><a href="https://doi.org/10.1002/smsc.202500421">Samimi et al., Small Sci. 2026 <span>↗</span></a></li>
+              <li><a href="https://doi.org/10.1039/D5AN00130G">Samimi et al., Analyst 2025 <span>↗</span></a></li>
+            </ul>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" hidden>
+            <h3>Optofluidic detection and multimodal imaging</h3>
+            <p>Integration of fluorescence-based optofluidic detection with multiplexed droplet generation, and automated imaging of bacteria cultured in picoliter droplets by coherent anti-Stokes Raman scattering (CARS) and two-photon excited fluorescence (TPEF) microscopy.</p>
+            <ul class="cites" aria-label="Related publications">
+              <li><a href="https://doi.org/10.1039/D5AN00130G">Samimi et al., Analyst 2025 <span>↗</span></a></li>
+              <li><a href="https://doi.org/10.1002/jrs.70105">Ott et al., J. Raman Spectrosc. 2026 <span>↗</span></a></li>
+            </ul>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0" hidden>
+            <h3>Cultivation, isolation and screening</h3>
+            <p>Droplet-based cultivation and high-throughput isolation of mouse gut microbiome bacteria, recovery of individual picoliter droplets by triggered deposition, and droplet microfluidics for enzyme screening.</p>
+            <ul class="cites" aria-label="Related publications">
+              <li><a href="https://doi.org/10.1128/aem.00695-25">Hengoju et al., Appl. Environ. Microbiol. 2025 <span>↗</span></a></li>
+              <li><a href="https://www.sciencedirect.com/science/article/pii/S0925400522009315">Weber et al., Sens. Actuators B Chem. 2022 <span>↗</span></a></li>
+              <li><a href="https://doi.org/10.1007/s12268-024-2144-7">Graf et al., BIOspektrum 2024 <span>↗</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4 · PICOSCREEN ================= -->
+  <section class="page dark pico" id="picoscreen" aria-labelledby="pico-title">
+    <div class="wrap pico-grid">
+      <div>
+        <p class="eyebrow">Translation · Start-up</p>
+        <h2 id="pico-title">PicoScreen</h2>
+        <p class="pico-sub">Ultra-high-throughput screening in picoliter droplets.</p>
+        <p class="pico-body">In parallel to two research projects at Leibniz-HKI, I am incubating PicoScreen, a start&#8209;up concept that aims to make droplet-based ultra-high-throughput screening robust, reproducible and accessible.</p>
+        <div class="pico-cta">
+          <a class="btn btn-primary" href="#contact">Discuss a screening project</a>
+        </div>
+      </div>
+      <figure class="pico-fig">
+        <canvas class="pico-canvas" role="img" aria-label="A circular field of grey dots, a droplet library, rotating slowly while a scanning sweep passes over it. One dot glows green: the single hit."></canvas>
+        <figcaption><span>Schematic · one hit in a droplet library</span><button class="flow-btn" type="button" id="pico-toggle" aria-pressed="false">Pause</button></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 5 · PUBLICATIONS ================= -->
+  <section class="page" id="publications" aria-labelledby="pub-title">
+    <div class="wrap">
+      <div class="pub-head">
+        <div>
+          <p class="eyebrow">Publications</p>
+          <h2 id="pub-title">Selected publications</h2>
+        </div>
+        <div class="chips" role="group" aria-label="Filter publications by topic">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-filter="make" aria-pressed="false">Combinatorial libraries</button>
+          <button class="chip" type="button" data-filter="read" aria-pressed="false">Detection &amp; imaging</button>
+          <button class="chip" type="button" data-filter="recover" aria-pressed="false">Cultivation &amp; isolation</button>
+          <button class="chip" type="button" data-filter="first" aria-pressed="false">First author</button>
+          <span class="count" id="pub-count" aria-live="polite">7 of 7</span>
+        </div>
+      </div>
+
+      <ol class="pubs" id="pubs">
+        <li data-topic="make first">
+          <span class="pub-src"><b>2026</b> Small Science <span class="tag first">First author</span></span>
+          <a class="pub-title" href="https://doi.org/10.1002/smsc.202500421">Probing antibiotic inhibition in small bacterial populations with combinatorial droplet microfluidics <span>↗</span></a>
+          <p class="pub-authors"><b>Samimi, A.</b>, Verdon, N., Allen, R., Rosenbaum, M. A.</p>
+        </li>
+        <li data-topic="read">
+          <span class="pub-src"><b>2026</b> J. Raman Spectrosc.</span>
+          <a class="pub-title" href="https://doi.org/10.1002/jrs.70105">Automated imaging of cultured bacteria in picoliter droplets by coherent anti-Stokes Raman scattering and two-photon excited fluorescence microscopy <span>↗</span></a>
+          <p class="pub-authors">Ott, F., <b>Samimi, A.</b>, Hengoju, S., Meyer-Zedler, T., Schmitt, M., Rosenbaum, M. A., Popp, J.</p>
+        </li>
+        <li data-topic="recover">
+          <span class="pub-src"><b>2025</b> Appl. Environ. Microbiol.</span>
+          <a class="pub-title" href="https://doi.org/10.1128/aem.00695-25">A droplet microfluidic strategy for cultivation, investigation, and high-throughput isolation of mouse gut microbiome bacteria <span>↗</span></a>
+          <p class="pub-authors">Hengoju, S., Abdissa, K., Boto, S. T., <b>Samimi, A.</b>, Martin, K., Jacobsen, I. D., Rosenbaum, M. A.</p>
+        </li>
+        <li data-topic="read make first">
+          <span class="pub-src"><b>2025</b> Analyst <span class="tag first">First author</span></span>
+          <a class="pub-title" href="https://doi.org/10.1039/D5AN00130G">Advancing droplet-based microbiological assays: optofluidic detection meets multiplexed droplet generation <span>↗</span></a>
+          <p class="pub-authors"><b>Samimi, A.</b>, Hengoju, S., Martin, K., Rosenbaum, M. A.</p>
+        </li>
+        <li data-topic="make first">
+          <span class="pub-src"><b>2024</b> Sens. Actuators B Chem. <span class="tag first">First author</span></span>
+          <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S092540052400892X">Combinatorial sample preparation platform for droplet-based applications in microbiology <span>↗</span></a>
+          <p class="pub-authors"><b>Samimi, A.</b>, Hengoju, S., Rosenbaum, M. A.</p>
+        </li>
+        <li data-topic="recover">
+          <span class="pub-src"><b>2024</b> BIOspektrum</span>
+          <a class="pub-title" href="https://doi.org/10.1007/s12268-024-2144-7" lang="de">Tröpfchenmikrofluidik für das Enzymscreening <span>↗</span></a>
+          <p class="pub-authors">Graf, M., <b>Samimi, A.</b>, Rosenbaum, M. A., Hengoju, S.</p>
+        </li>
+        <li data-topic="recover">
+          <span class="pub-src"><b>2022</b> Sens. Actuators B Chem.</span>
+          <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S0925400522009315">Recovery and isolation of individual microfluidic picoliter droplets by triggered deposition <span>↗</span></a>
+          <p class="pub-authors">Weber, T., Hengoju, S., <b>Samimi, A.</b>, Roth, M., Tovar, M., Rosenbaum, M. A.</p>
+        </li>
+      </ol>
+
+      <div class="pub-more">
+        <a class="link-arrow" href="https://scholar.google.com/citations?user=MOuCEE4AAAAJ&amp;hl=en">Complete list on Google Scholar →</a>
+        <a class="link-arrow" href="https://orcid.org/0000-0002-9014-7465">ORCID 0000-0002-9014-7465 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6 · CAREER ================= -->
+  <section class="page" id="career" aria-labelledby="career-title">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Career</p>
+        <h2 id="career-title">Optics, photonics, then microbial systems.</h2>
+      </div>
+      <ol class="timeline">
+        <li>
+          <span class="drop" aria-hidden="true"></span>
+          <span class="when">09/2012 – 06/2016</span>
+          <h3>BSc, Laser and Optics Engineering</h3>
+          <p class="where">University of Bonab, Iran</p>
+          <p class="what">Ranked first in the Faculty of Science and Engineering.</p>
+        </li>
+        <li>
+          <span class="drop" aria-hidden="true"></span>
+          <span class="when">09/2016 – 12/2019</span>
+          <h3>MSc, Photonics</h3>
+          <p class="where">Laser and Plasma Research Institute (LAPRI), Tehran</p>
+          <p class="what">Ranked first in the graduate program.</p>
+        </li>
+        <li>
+          <span class="drop" aria-hidden="true"></span>
+          <span class="when">03/2020 – 12/2024</span>
+          <h3>Doctoral researcher</h3>
+          <p class="where">Leibniz-HKI &amp; Friedrich Schiller University Jena</p>
+          <p class="what">Developed a combinatorial sample-preparation platform for droplet-based microbiological assays.</p>
+        </li>
+        <li class="now">
+          <span class="drop" aria-hidden="true"></span>
+          <span class="when">Since 01/2025 · current</span>
+          <h3>Scientific co-worker</h3>
+          <p class="where">Leibniz-HKI, Jena</p>
+          <p class="what">Management of two research projects; incubation of the start&#8209;up PicoScreen.</p>
+        </li>
+      </ol>
+      <div class="awards">
+        <h3>Distinctions</h3>
+        <ul>
+          <li><span>Fellowship</span><span>DAAD fellowship award</span></li>
+          <li><span>Entrance exam</span><span>Ranked 2nd of 1,087 candidates, Iranian national graduate entrance examination (Photonics)</span></li>
+          <li><span>MSc · LAPRI</span><span>Top-ranked student of the graduate program <small>· GPA 18.25 / 20</small></span></li>
+          <li><span>2015 · 2016</span><span>Iranian National Physics Olympiad <small>· final round, ranked 19th and 20th</small></span></li>
+          <li><span>BSc · Bonab</span><span>Top-ranked student, Faculty of Science and Engineering <small>· GPA 18.75 / 20</small></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7 · METHODS ================= -->
+  <section class="page" id="methods" aria-labelledby="kit-title">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Methods</p>
+        <h2 id="kit-title">Methods and instrumentation.</h2>
+      </div>
+      <div class="kit">
+        <div><h3>Microfabrication</h3><ul><li>UV photolithography</li><li>3D printing <small>· additive manufacturing</small></li><li>Microfluidic device design</li></ul></div>
+        <div><h3>Optics &amp; detection</h3><ul><li>Optical sensors</li><li>Fluorescence imaging and detection</li><li>Optofluidic integration</li></ul></div>
+        <div><h3>Computation</h3><ul><li>Python <small>· image processing, quantitative data analysis</small></li><li>LabVIEW <small>· instrument control</small></li></ul></div>
+        <div><h3>Modelling</h3><ul><li>COMSOL Multiphysics <small>· Microfluidics Module</small></li><li>Theoretical microfluidics</li></ul></div>
+        <div><h3>Microbiology</h3><ul><li>Standard microbiological techniques</li><li>Microbial physiology</li><li>Microbial biotechnology</li></ul></div>
+        <div><h3>Research interests</h3><ul><li>Lab-on-a-chip systems</li><li>Laboratory automation in microbiology</li><li>Methodological innovation in microbiology</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8 · CONTACT ================= -->
+  <section class="page dark contact" id="contact" aria-labelledby="contact-title">
+    <canvas class="contact-canvas" aria-hidden="true"></canvas>
+    <div class="wrap contact-inner">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-title">Open to collaborations, invited talks and seminars.</h2>
+      <p>I welcome inquiries on microbiological questions that call for higher throughput, small-population resolution or combinatorial assay design.</p>
+      <div class="email-row">
+        <span class="email" id="email">ashkan.samimi@hki-jena.de</span>
+        <button class="copy-btn" type="button" id="copy-email">Copy</button>
+      </div>
+      <div class="profiles">
+        <a class="btn btn-primary" href="mailto:ashkan.samimi@hki-jena.de">Send an email</a>
+        <a class="btn btn-outline" href="https://scholar.google.com/citations?user=MOuCEE4AAAAJ&amp;hl=en">Google Scholar ↗</a>
+        <a class="btn btn-outline" href="https://orcid.org/0000-0002-9014-7465">ORCID ↗</a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/ashkan-samimi-232302105/">LinkedIn ↗</a>
+      </div>
+      <address class="address">Leibniz Institute for Natural Product Research and Infection Biology – Hans Knöll Institute (Leibniz-HKI)<br>Beutenbergstraße 11a · 07745 Jena · Germany</address>
+    </div>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>© <span id="year">2026</span> Ashkan Samimi · Jena</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </section>
+</main>
+
+<script>
+/* Shared state between the Research tabs and Fig. 1 */
+const FigState = { stage: 1, redraw: null, selectStage: null };
+
+/* ==========================================================================
+   Small UI behaviours
+   ========================================================================== */
+(() => {
+  const store = {
+    get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+    set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+  };
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const links = document.getElementById('nav-links');
+  const setMenu = open => { links.dataset.open = String(open); menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.textContent = open ? 'Close' : 'Menu'; };
+  menuBtn.addEventListener('click', () => setMenu(links.dataset.open !== 'true'));
+  links.addEventListener('click', e => { if (e.target.closest('a') && matchMedia('(max-width: 900px)').matches) setMenu(false); });
+
+  // Highlight the current page in the header and in the page rail
+  const headerMap = new Map([...links.querySelectorAll('a[href^="#"]')].map(a => [a.getAttribute('href').slice(1), a]));
+  const railLinks = [...document.querySelectorAll('#rail a')];
+  if ('IntersectionObserver' in window){
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const id = en.target.id;
+        headerMap.forEach(a => a.removeAttribute('aria-current'));
+        const h = headerMap.get(id === 'methods' ? 'career' : id);
+        if (h) h.setAttribute('aria-current', 'true');
+        railLinks.forEach(a => a.getAttribute('href') === '#' + id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+      });
+    }, { rootMargin:'-45% 0px -50% 0px' });
+    document.querySelectorAll('main > section[id]').forEach(s => spy.observe(s));
+  }
+
+  // About: technical summary vs lay summary
+  const readerBtns = document.querySelectorAll('[data-reader]');
+  const setReader = v => {
+    readerBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.reader === v)));
+    document.querySelectorAll('.reader').forEach(r => { r.hidden = r.dataset.version !== v; });
+    store.set('as-reader', v);
+  };
+  readerBtns.forEach(b => b.addEventListener('click', () => setReader(b.dataset.reader)));
+  if (store.get('as-reader') === 'plain') setReader('plain');
+
+  // Research tabs (also highlight the matching stage in Fig. 1)
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const selectTab = (tab, focus) => {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+    FigState.stage = Number(tab.dataset.stage);
+    if (FigState.redraw) FigState.redraw();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => selectTab(t));
+    t.addEventListener('keydown', e => {
+      const k = e.key; let j = null;
+      if (k === 'ArrowRight' || k === 'ArrowDown') j = (i + 1) % tabs.length;
+      if (k === 'ArrowLeft' || k === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+      if (k === 'Home') j = 0;
+      if (k === 'End') j = tabs.length - 1;
+      if (j !== null){ e.preventDefault(); selectTab(tabs[j], true); }
+    });
+  });
+  FigState.selectStage = n => selectTab(tabs[n - 1]);
+
+  // Publication filter
+  const chips = document.querySelectorAll('.chip');
+  const pubs = [...document.querySelectorAll('#pubs li')];
+  const count = document.getElementById('pub-count');
+  chips.forEach(c => c.addEventListener('click', () => {
+    const f = c.dataset.filter; let n = 0;
+    chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    pubs.forEach(li => { const show = f === 'all' || li.dataset.topic.split(' ').includes(f); li.hidden = !show; if (show) n++; });
+    count.textContent = `${n} of ${pubs.length}`;
+  }));
+
+  // Copy email
+  const copyBtn = document.getElementById('copy-email');
+  copyBtn.addEventListener('click', () => {
+    const el = document.getElementById('email');
+    const done = () => { copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.textContent = 'Copy', 1800); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected · press Ctrl+C'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(el.textContent.trim()).then(done, fallback);
+    else fallback();
+  });
+})();
+
+/* ==========================================================================
+   Animation helper: runs a draw loop only while its element is on screen,
+   the tab is visible, the visitor hasn't paused it and motion is allowed.
+   ========================================================================== */
+function animated(el, btn, labels, frame){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  let playing = !reduce.matches, visible = true, raf = 0, last = 0;
+  const loop = ts => { if (!last) last = ts; const dt = Math.min(.05, (ts - last) / 1000); last = ts; frame(dt); raf = requestAnimationFrame(loop); };
+  const sync = () => {
+    cancelAnimationFrame(raf); raf = 0; last = 0;
+    if (playing && visible && !document.hidden) raf = requestAnimationFrame(loop);
+    btn.textContent = playing ? labels[0] : labels[1];
+    btn.setAttribute('aria-pressed', String(!playing));
+  };
+  btn.addEventListener('click', () => { playing = !playing; sync(); });
+  reduce.addEventListener?.('change', e => { playing = !e.matches; sync(); });
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(el);
+  sync();
+}
+function onResize(fn){ let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fn, 150); }); }
+
+/* ==========================================================================
+   Shared: motion-graphic emulsion renderer
+   ========================================================================== */
+const Emulsion = (() => {
+  const rng = seed => () => { seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const LV = [.14, .36, .62, .95];
+  const CY = [64, 216, 206], IR = [140, 146, 255];
+  const colour = (a, b, k) => [0,1,2].map(i => Math.min(255, Math.round((8 + LV[a] * CY[i] + LV[b] * IR[i]) * k)));
+  const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+  function build({ width, height, R, seed, cellP = .3, gap = 3 }){
+    const rand = rng(seed);
+    const dx = 2 * R + gap, dy = dx * Math.sqrt(3) / 2;
+    const cols = Math.ceil(width / dx) + 2, rows = Math.ceil(height / dy) + 1;
+    const drops = [];
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++){
+      const u = rand(); let a = 0, b = 0;
+      if (u < .4){ a = 0; b = 0; } else if (u < .72){ a = 1 + Math.floor(rand() * 3); } else if (u < .97){ b = 1 + Math.floor(rand() * 3); } else { a = 1; b = 1; }
+      const d = { x: c * dx + (r % 2 ? dx / 2 : 0), y: r * dy + R + 2, row: r, a, b, k: .9 + rand() * .15, cells: [] };
+      if (rand() < cellP){
+        const n = 1 + Math.floor(rand() * 4);
+        for (let i = 0; i < n; i++){ const ang = rand() * Math.PI * 2, rr = Math.sqrt(rand()) * R * .55; d.cells.push({ x: Math.cos(ang) * rr, y: Math.sin(ang) * rr, rot: rand() * Math.PI }); }
+      }
+      drops.push(d);
+    }
+    return { drops, dx, dy, tileW: cols * dx, R };
+  }
+  function drawDrop(g, d, x, R){
+    const c = colour(d.a, d.b, d.k);
+    g.beginPath(); g.arc(x, d.y, R, 0, Math.PI * 2); g.fillStyle = rgb(c); g.fill();
+    g.beginPath(); g.arc(x, d.y, R - 1, 0, Math.PI * 2); g.lineWidth = 1.4; g.strokeStyle = rgb(c.map(v => Math.min(255, v * 1.25 + 26))); g.stroke();
+    g.beginPath(); g.arc(x - R * .4, d.y - R * .42, R * .14, 0, Math.PI * 2); g.fillStyle = 'rgba(255,255,255,.35)'; g.fill();
+    if (d.cells.length){
+      const len = Math.max(3, R * .3), w = Math.max(2, R * .14);
+      g.lineCap = 'round'; g.lineWidth = w; g.strokeStyle = '#F5B947'; g.beginPath();
+      for (const cl of d.cells){ const ex = Math.cos(cl.rot) * len / 2, ey = Math.sin(cl.rot) * len / 2; g.moveTo(x + cl.x - ex, d.y + cl.y - ey); g.lineTo(x + cl.x + ex, d.y + cl.y + ey); }
+      g.stroke();
+    }
+  }
+  function tile(lat, height, dpr, bg){
+    const cv = document.createElement('canvas');
+    cv.width = Math.ceil(lat.tileW * dpr); cv.height = Math.ceil(height * dpr);
+    const g = cv.getContext('2d'); g.scale(dpr, dpr);
+    g.fillStyle = bg; g.fillRect(0, 0, lat.tileW, height);
+    for (const d of lat.drops){
+      drawDrop(g, d, d.x, lat.R);
+      if (d.x + lat.R > lat.tileW) drawDrop(g, d, d.x - lat.tileW, lat.R);
+      if (d.x - lat.R < 0) drawDrop(g, d, d.x + lat.tileW, lat.R);
+    }
+    return cv;
+  }
+  return { build, tile, LV, rng };
+})();
+
+/* ==========================================================================
+   HERO: emulsion flowing past a detection line (simulated readout)
+   ========================================================================== */
+(() => {
+  const hero = document.querySelector('.hero');
+  const cv = hero.querySelector('.hero-canvas'), tr = hero.querySelector('.trace-canvas');
+  const ctx = cv.getContext('2d'), tctx = tr.getContext('2d');
+  const SPEED = 24, BG = '#061117';
+  let W, H, dpr, lat, tileCv, spotRow, spotY, laserX, TW, TH, ox = 137;
+
+  function layout(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const R = W < 700 ? 11 : 15;
+    lat = Emulsion.build({ width: W, height: H, R, seed: 19, cellP: .18 });
+    tileCv = Emulsion.tile(lat, H, dpr, BG);
+    const hr = hero.getBoundingClientRect();
+    const pr = hero.querySelector('.droplet-frame').getBoundingClientRect();
+    const txr = hero.querySelector('.hero-text').getBoundingClientRect();
+    laserX = Math.round(W > 900 ? (txr.right + pr.left) / 2 - hr.left : W - Math.max(22, W * .07));
+    spotRow = Math.max(0, Math.round((pr.top + pr.height / 2 - hr.top - R - 2) / lat.dy));
+    spotY = spotRow * lat.dy + R + 2;
+    TW = tr.clientWidth; TH = tr.clientHeight;
+    tr.width = Math.round(TW * dpr); tr.height = Math.round(TH * dpr);
+  }
+  const screenX = (d, o) => { let x = d.x - o; if (x < -lat.R) x += lat.tileW; return x; };
+
+  function draw(){
+    const R = lat.R, o = ((ox % lat.tileW) + lat.tileW) % lat.tileW;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.drawImage(tileCv, 0, 0, tileCv.width, tileCv.height, -o, 0, lat.tileW, H);
+    ctx.drawImage(tileCv, 0, 0, tileCv.width, tileCv.height, -o + lat.tileW, 0, lat.tileW, H);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const d of lat.drops){
+      const x = screenX(d, o), dist = Math.abs(x - laserX);
+      if (dist < R){ const a = 1 - dist / R, spot = d.row === spotRow; ctx.fillStyle = `rgba(210,240,240,${(spot ? .4 : .09) * a})`; ctx.beginPath(); ctx.arc(x, d.y, R, 0, Math.PI * 2); ctx.fill(); }
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(180,240,235,.07)'; ctx.fillRect(laserX - 7, 0, 14, H);
+    ctx.fillStyle = 'rgba(220,245,242,.6)';  ctx.fillRect(laserX - .5, 0, 1, H);
+    const s = R + 7, l = 6;
+    ctx.strokeStyle = 'rgba(230,240,242,.92)'; ctx.lineWidth = 1.25; ctx.beginPath();
+    for (const [sx, sy] of [[-1,-1],[1,-1],[-1,1],[1,1]]){ const cx = laserX + sx * s, cy = spotY + sy * s; ctx.moveTo(cx - sx * l, cy); ctx.lineTo(cx, cy); ctx.lineTo(cx, cy - sy * l); }
+    ctx.stroke();
+    if (W > 900){
+      ctx.font = '500 10px "JetBrains Mono", ui-monospace, monospace'; ctx.textAlign = 'center';
+      const tw = ctx.measureText('DETECTION VOLUME').width + 12;
+      ctx.fillStyle = 'rgba(6,17,23,.82)'; ctx.fillRect(laserX - tw / 2, spotY - s - 23, tw, 17);
+      ctx.fillStyle = 'rgba(230,240,242,.9)'; ctx.fillText('DETECTION VOLUME', laserX, spotY - s - 11);
+    }
+    drawTrace(o);
+  }
+
+  function drawTrace(o){
+    const R = lat.R, LV = Emulsion.LV;
+    tctx.setTransform(dpr, 0, 0, dpr, 0, 0); tctx.clearRect(0, 0, TW, TH);
+    const n = Math.max(2, Math.min(TW, Math.floor(laserX)));
+    const A = new Float32Array(n + 1), B = new Float32Array(n + 1), C = new Float32Array(n + 1);
+    for (const d of lat.drops){
+      if (d.row !== spotRow) continue;
+      const x = screenX(d, o);
+      if (x < -1.4 * R || x > laserX + 1.4 * R) continue;
+      for (let px = Math.max(0, Math.floor(x - 1.4 * R)); px <= Math.min(n, Math.ceil(x + 1.4 * R)); px++){
+        const f = 1 / (1 + Math.pow(Math.abs(px - x) / (R * .82), 8));
+        A[px] += f * LV[d.a] * .92 * d.k; B[px] += f * LV[d.b] * .92 * d.k;
+      }
+      for (const c of d.cells){ const cx = x + c.x; for (let px = Math.max(0, Math.floor(cx - 4)); px <= Math.min(n, Math.ceil(cx + 4)); px++) C[px] = Math.max(C[px], .78 * Math.exp(-((px - cx) ** 2) / 2.6)); }
+    }
+    const base = TH - 10, amp = TH - 22;
+    tctx.fillStyle = 'rgba(134,160,167,.22)'; tctx.fillRect(0, base, n, 1); tctx.fillRect(0, base - amp, n, 1);
+    for (let t = (100 - (o % 100)) % 100; t < n; t += 100) tctx.fillRect(t, base, 1, 5);
+    const plot = (arr, rgbs, fa) => {
+      tctx.beginPath(); tctx.moveTo(0, base);
+      for (let px = 0; px <= n; px++){ const w = px + o, noise = .01 * (Math.sin(w * .91) + Math.sin(w * 2.37 + 1.3) + Math.sin(w * .23)); tctx.lineTo(px, base - amp * Math.min(1, Math.max(0, arr[px] + noise))); }
+      tctx.lineTo(n, base); tctx.closePath(); tctx.fillStyle = `rgba(${rgbs},${fa})`; tctx.fill(); tctx.strokeStyle = `rgba(${rgbs},.95)`; tctx.lineWidth = 1.3; tctx.stroke();
+    };
+    plot(B, '156,161,255', .12); plot(A, '79,216,207', .14); plot(C, '245,185,71', .2);
+    tctx.fillStyle = 'rgba(220,245,242,.6)'; tctx.fillRect(laserX - .5, 0, 1, TH);
+    if (TW - laserX > 150){
+      tctx.font = '500 10px "JetBrains Mono", ui-monospace, monospace'; tctx.textAlign = 'left'; tctx.fillStyle = 'rgba(134,160,167,.95)';
+      tctx.fillText(TW - laserX > 300 ? '← FLOW  ·  TIME-RESOLVED SIGNAL' : '← FLOW', laserX + 14, TH / 2 + 3);
+    }
+  }
+
+  layout(); draw();
+  animated(hero, document.getElementById('flow-toggle'), ['Pause flow', 'Resume flow'], dt => { ox += SPEED * dt; draw(); });
+  onResize(() => { layout(); draw(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { layout(); draw(); });
+})();
+
+/* ==========================================================================
+   FIG. 1: animated workflow schematic (generation → detection → sorting)
+   Geometry in units of 1/100 of the canvas width. The selected Research tab
+   highlights its stage; clicking a stage in the figure selects its tab.
+   ========================================================================== */
+(() => {
+  const cv = document.querySelector('.fig-canvas');
+  const ctx = cv.getContext('2d');
+  const rand = Emulsion.rng(7);
+  const CY = [79,216,207], IR = [156,161,255], AMB = '#F5B947';
+  const C = { bg:'#061117', wall:'#2B4A55', chan:'#0C2129', oil:'#11303A', label:'#86A0A7', text:'#E6F0F2' };
+  const V = 15, T = .8, R = 3.6, YJ = 40, YD = 66, YS = 92, CO = 10;
+  const ZONES = [null, [0, 53], [53, 81], [81, 132]];
+  const ratioAt = t => .5 + .42 * Math.sin(2 * Math.PI * t / 6.5);
+  const mix = r => CY.map((c, i) => Math.round(c * (1 - r) + IR[i] * r));
+  const rgb = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  const poisson = lam => { let L = Math.exp(-lam), k = 0, p = 1; do { k++; p *= rand(); } while (p > L); return k - 1; };
+  let w, h, u, dpr, t = 0, phase = 0, drops = [], trace = [], gateFlash = 0;
+
+  const route = hit => [[50, YJ + 4], [50, YS], hit ? [68, 104] : [32, 104], hit ? [68, 140] : [32, 140]];
+  function at(pts, s){
+    for (let i = 0; i < pts.length - 1; i++){
+      const [x0, y0] = pts[i], [x1, y1] = pts[i + 1], L = Math.hypot(x1 - x0, y1 - y0);
+      if (s <= L) return [x0 + (x1 - x0) * s / L, y0 + (y1 - y0) * s / L];
+      s -= L;
+    }
+    return pts[pts.length - 1];
+  }
+  function spawn(){
+    const ratio = ratioAt(t), k = poisson(.45);
+    const cells = Array.from({ length: k }, () => { const a = rand() * 6.283, r = Math.sqrt(rand()) * R * .5; return { x: Math.cos(a) * r, y: Math.sin(a) * r, rot: rand() * 3.14 }; });
+    const hit = k > 0 && rand() < .55;
+    drops.push({ s: 0, ratio, cells, hit, read: false, glow: 0, route: route(hit), y: YJ + 4 });
+  }
+  function step(dt){
+    t += dt; phase += dt / T;
+    if (phase >= 1){ phase -= 1; spawn(); }
+    const sig = [0, 0, 0];
+    for (const d of drops){
+      d.s += V * dt; d.y = at(d.route, d.s)[1];
+      const dist = Math.abs(d.y - YD);
+      if (dist < R * 1.2){
+        const f = 1 / (1 + Math.pow(dist / (R * .9), 6));
+        sig[0] = Math.max(sig[0], f * (1 - d.ratio) * .9); sig[1] = Math.max(sig[1], f * d.ratio * .9);
+        if (d.cells.length) sig[2] = Math.max(sig[2], f * (d.hit ? .95 : .35));
+      }
+      if (!d.read && d.y >= YD){ d.read = true; d.glow = 1; }
+      d.glow = Math.max(0, d.glow - dt * 1.6);
+      if (d.hit && Math.abs(d.y - YS) < 1) gateFlash = 1;
+    }
+    gateFlash = Math.max(0, gateFlash - dt * 2.5);
+    drops = drops.filter(d => d.y < 136);
+    trace.push(sig); if (trace.length > 220) trace.shift();
+  }
+  function layout(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    w = cv.clientWidth; h = w * 1.32; u = w / 100;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+  }
+  const P = (x, y) => [x * u, y * u];
+  function chan(pts, width, color){
+    ctx.beginPath(); ctx.moveTo(...P(...pts[0]));
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(...P(...pts[i]));
+    ctx.lineWidth = width * u; ctx.strokeStyle = color; ctx.lineJoin = 'round'; ctx.lineCap = 'butt'; ctx.stroke();
+  }
+  const NET = {
+    A: [[28,-2],[28,8],[47.5,18.5]], B: [[72,-2],[72,8],[52.5,18.5]],
+    co: [[50,17],[50,YJ]], oilL: [[-2,YJ],[50,YJ]], oilR: [[102,YJ],[50,YJ]],
+    main: [[50,YJ],[50,YS]], waste: [[50,YS],[32,104],[32,134]], keep: [[50,YS],[68,104],[68,134]]
+  };
+  function label(txt, x, y, color = C.label, align = 'left', size = 2.1){
+    ctx.font = `500 ${Math.max(8.5, size * u)}px "JetBrains Mono", ui-monospace, monospace`;
+    ctx.fillStyle = color; ctx.textAlign = align; ctx.fillText(txt, x * u, y * u);
+  }
+
+  function draw(){
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(134,160,167,.12)';
+    for (let gx = 5; gx < 100; gx += 10) for (let gy = 5; gy < 132; gy += 10){ ctx.fillRect(gx * u - 2, gy * u, 5, 1); ctx.fillRect(gx * u, gy * u - 2, 1, 5); }
+
+    const sets = [[NET.A,5],[NET.B,5],[NET.co,8],[NET.oilL,5.5],[NET.oilR,5.5],[NET.main,9.5],[NET.waste,9.5],[NET.keep,9.5]];
+    for (const [p, wd] of sets) chan(p, wd + .9, C.wall);
+    for (const [p, wd] of sets) chan(p, wd, C.chan);
+    chan(NET.oilL, 5.5, C.oil); chan(NET.oilR, 5.5, C.oil);
+    chan(NET.A, 3.6, rgb(CY, .75)); chan(NET.B, 3.6, rgb(IR, .75));
+
+    // laminar co-flow: the interface travels down with the fluid
+    const x0 = 46.3, x1 = 53.7, iface = y => x0 + (x1 - x0) * (1 - ratioAt(t - (y - 18) / CO));
+    for (const [edge, col] of [[x0, CY], [x1, IR]]){
+      ctx.beginPath(); ctx.moveTo(edge * u, 18 * u);
+      for (let y = 18; y <= YJ - 1; y += .5) ctx.lineTo(iface(y) * u, y * u);
+      ctx.lineTo(edge * u, (YJ - 1) * u); ctx.closePath(); ctx.fillStyle = rgb(col, .85); ctx.fill();
+    }
+    // oil flowing towards the junction
+    ctx.save(); ctx.setLineDash([1.6 * u, 2.4 * u]); ctx.lineDashOffset = -t * 6 * u; ctx.lineWidth = .5 * u; ctx.strokeStyle = 'rgba(180,210,215,.45)';
+    ctx.beginPath(); ctx.moveTo(0, YJ * u); ctx.lineTo(44 * u, YJ * u); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(100 * u, YJ * u); ctx.lineTo(56 * u, YJ * u); ctx.stroke(); ctx.restore();
+    // droplet pinching off
+    const fr = R * (.55 + .45 * phase), fy = YJ + 4 * phase, neck = 7.4 * (1 - .85 * phase);
+    ctx.fillStyle = rgb(mix(ratioAt(t)));
+    ctx.fillRect((50 - neck / 2) * u, (YJ - 1.2) * u, neck * u, (fy - YJ + 1.2) * u);
+    ctx.beginPath(); ctx.arc(50 * u, fy * u, fr * u, 0, 6.283); ctx.fill();
+    // excitation beam + detector link
+    ctx.fillStyle = 'rgba(180,240,235,.08)'; ctx.fillRect(0, (YD - 1.4) * u, 50 * u, 2.8 * u);
+    ctx.fillStyle = 'rgba(220,245,242,.75)'; ctx.fillRect(0, YD * u - .5, 50 * u, 1);
+    ctx.save(); ctx.setLineDash([2, 3]); ctx.strokeStyle = 'rgba(134,160,167,.6)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(55 * u, YD * u); ctx.lineTo(62 * u, YD * u); ctx.lineTo(62 * u, 60 * u); ctx.stroke(); ctx.restore();
+    // droplets
+    for (const d of drops){
+      const [x, y] = at(d.route, d.s), c = mix(d.ratio);
+      if (d.read && d.hit){
+        ctx.strokeStyle = 'rgba(245,185,71,.9)'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(x * u, y * u, (R + 1.1) * u, 0, 6.283); ctx.stroke();
+        ctx.strokeStyle = 'rgba(245,185,71,.3)'; ctx.beginPath(); ctx.arc(x * u, y * u, (R + 2.3) * u, 0, 6.283); ctx.stroke();
+      }
+      ctx.beginPath(); ctx.arc(x * u, y * u, R * u, 0, 6.283); ctx.fillStyle = rgb(c); ctx.fill();
+      ctx.beginPath(); ctx.arc(x * u, y * u, R * u - 1, 0, 6.283); ctx.lineWidth = 1.2; ctx.strokeStyle = rgb(c.map(v => Math.min(255, v * 1.2 + 30))); ctx.stroke();
+      ctx.beginPath(); ctx.arc((x - R * .4) * u, (y - R * .42) * u, R * .14 * u, 0, 6.283); ctx.fillStyle = 'rgba(255,255,255,.4)'; ctx.fill();
+      if (d.glow > 0){ ctx.beginPath(); ctx.arc(x * u, y * u, R * u, 0, 6.283); ctx.fillStyle = `rgba(230,250,248,${.45 * d.glow})`; ctx.fill(); }
+      if (d.cells.length){
+        ctx.lineCap = 'round'; ctx.lineWidth = .55 * u; ctx.strokeStyle = AMB; ctx.beginPath();
+        for (const cl of d.cells){ const ex = Math.cos(cl.rot) * .7 * u, ey = Math.sin(cl.rot) * .7 * u; ctx.moveTo((x + cl.x) * u - ex, (y + cl.y) * u - ey); ctx.lineTo((x + cl.x) * u + ex, (y + cl.y) * u + ey); }
+        ctx.stroke();
+      }
+    }
+    // sorting electrodes
+    ctx.fillStyle = gateFlash > 0 ? `rgba(245,185,71,${.35 + .65 * gateFlash})` : 'rgba(134,160,167,.45)';
+    ctx.fillRect(56.5 * u, (YS - 7) * u, 2.2 * u, 5 * u);
+    ctx.fillStyle = 'rgba(134,160,167,.45)'; ctx.fillRect(41.3 * u, (YS - 7) * u, 2.2 * u, 5 * u);
+    // detector readout
+    const bx = 60, by = 46, bw = 36, bh = 14;
+    ctx.strokeStyle = C.wall; ctx.lineWidth = 1; ctx.strokeRect(bx * u, by * u, bw * u, bh * u);
+    const n = trace.length, stp = bw * u / 220;
+    const plot = (i, col) => { ctx.beginPath(); trace.forEach((s, j) => { const X = bx * u + (220 - n + j) * stp, Y = (by + bh - 1.2) * u - s[i] * (bh - 3) * u; j ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }); ctx.strokeStyle = col; ctx.lineWidth = 1.2; ctx.stroke(); };
+    plot(1, rgb(IR)); plot(0, rgb(CY)); plot(2, AMB);
+    label('DETECTOR · a.u.', bx, by - 1.3);
+    // labels
+    label('A', 24.5, 4, rgb(CY), 'right', 2.6); label('B', 75.5, 4, rgb(IR), 'left', 2.6);
+    label('OIL + SURFACTANT', 3, YJ - 4.2); label('OIL', 97, YJ - 4.2, C.label, 'right');
+    label('01  GENERATION', 3, 24, C.text); label('laminar co-flow', 3, 27.4); label('flow focusing', 3, 47.5);
+    label('02  DETECTION', 3, YD - 3.6, C.text); label('LIF', 3, YD + 4);
+    label('03  SORTING', 3, YS - 3, C.text);
+    label('POISSON LOADING', 57, 76, C.label, 'left', 1.9); label('λ ≈ 0.45', 57, 79.4, C.label, 'left', 1.9);
+    label('WASTE', 26, 128, C.label, 'right'); label('COLLECT', 74, 128, AMB, 'left');
+
+    // highlight the stage selected in the Research tabs
+    const z = ZONES[FigState.stage];
+    ctx.fillStyle = 'rgba(6,17,23,.55)';
+    if (z[0] > 0) ctx.fillRect(0, 0, w, z[0] * u);
+    if (z[1] < 132) ctx.fillRect(0, z[1] * u, w, h - z[1] * u);
+    ctx.strokeStyle = 'rgba(79,216,207,.9)'; ctx.lineWidth = 1.5;
+    const y0 = z[0] * u + 4, y1 = z[1] * u - 4, x0b = 4, x1b = w - 4, k = 12;
+    ctx.beginPath();
+    ctx.moveTo(x0b, y0 + k); ctx.lineTo(x0b, y0); ctx.lineTo(x0b + k, y0);
+    ctx.moveTo(x1b - k, y0); ctx.lineTo(x1b, y0); ctx.lineTo(x1b, y0 + k);
+    ctx.moveTo(x0b, y1 - k); ctx.lineTo(x0b, y1); ctx.lineTo(x0b + k, y1);
+    ctx.moveTo(x1b - k, y1); ctx.lineTo(x1b, y1); ctx.lineTo(x1b, y1 - k);
+    ctx.stroke();
+  }
+
+  // clicking a stage in the figure selects the matching tab
+  cv.addEventListener('click', e => {
+    const r = cv.getBoundingClientRect(), y = (e.clientY - r.top) / r.width * 100;
+    if (FigState.selectStage) FigState.selectStage(y < 53 ? 1 : y < 81 ? 2 : 3);
+  });
+
+  layout();
+  for (let i = 0; i < 600; i++) step(1 / 60);
+  draw();
+  FigState.redraw = draw;
+  animated(cv, document.getElementById('fig-toggle'), ['Pause', 'Play'], dt => { step(dt); draw(); });
+  onResize(() => { layout(); draw(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
+
+/* ==========================================================================
+   PICOSCREEN: rotating circular droplet library with one green hit
+   Dots sit on a Fermat (sunflower) spiral, shaded in greys. The field turns
+   slowly; a scanning sweep brightens dots as it passes; the hit glows in
+   PicoScreen green with an echo of expanding rings.
+   ========================================================================== */
+(() => {
+  const cv = document.querySelector('.pico-canvas');
+  const ctx = cv.getContext('2d');
+  const N = 420, GOLD = Math.PI * (3 - Math.sqrt(5)), HIT = 268;
+  const W_FIELD = 2 * Math.PI / 140, W_SWEEP = 2 * Math.PI / 7, W_TICKS = -2 * Math.PI / 260;
+  const rand = Emulsion.rng(11);
+  const dots = Array.from({ length: N }, (_, i) => ({ i, f: Math.sqrt((i + .5) / N), a: i * GOLD, g: 70 + Math.round(rand() * 95), s: .75 + rand() * .45 }));
+  let S, dpr, cx, cy, Rm, t = 0;
+
+  function layout(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    S = cv.clientWidth; cv.width = Math.round(S * dpr); cv.height = Math.round(S * dpr);
+    cx = cy = S / 2; Rm = S * .46;
+  }
+  const angDiff = (a, b) => { let d = (a - b) % (2 * Math.PI); if (d < 0) d += 2 * Math.PI; return d; };
+
+  function draw(){
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, S, S);
+    const rot = t * W_FIELD, sweep = t * W_SWEEP - Math.PI / 2, ticks = t * W_TICKS;
+
+    // dial: outer ring + rotating ticks
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(134,160,167,.28)'; ctx.beginPath(); ctx.arc(cx, cy, Rm, 0, 2 * Math.PI); ctx.stroke();
+    ctx.strokeStyle = 'rgba(134,160,167,.12)'; ctx.beginPath(); ctx.arc(cx, cy, Rm * .965, 0, 2 * Math.PI); ctx.stroke();
+    ctx.strokeStyle = 'rgba(134,160,167,.4)'; ctx.beginPath();
+    for (let k = 0; k < 120; k++){
+      const a = ticks + k * 2 * Math.PI / 120, long = k % 10 === 0, r0 = Rm * (long ? 1.025 : 1.012), r1 = Rm * 1.045;
+      ctx.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); ctx.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1);
+    }
+    ctx.stroke();
+
+    // sweep wedge (conic gradient where supported) + sweep line
+    if (ctx.createConicGradient){
+      const g = ctx.createConicGradient(sweep - .9, cx, cy);
+      g.addColorStop(0, 'rgba(180,200,205,0)'); g.addColorStop(.143, 'rgba(180,200,205,.08)'); g.addColorStop(.1432, 'rgba(180,200,205,0)'); g.addColorStop(1, 'rgba(180,200,205,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, Rm * .96, 0, 2 * Math.PI); ctx.fill();
+    }
+    ctx.strokeStyle = 'rgba(200,220,225,.35)';
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(sweep) * Rm * .96, cy + Math.sin(sweep) * Rm * .96); ctx.stroke();
+
+    // dots in shades of grey; brightened just after the sweep passes
+    const dr = Math.max(2, S * .0078);
+    let hx = 0, hy = 0, hitLit = 0;
+    for (const d of dots){
+      const a = d.a + rot, r = d.f * Rm * .9, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+      const lit = Math.max(0, 1 - angDiff(sweep, a) / 1.1);
+      if (d.i === HIT){ hx = x; hy = y; hitLit = lit; continue; }
+      const gv = Math.round(Math.min(230, d.g + lit * 70));
+      ctx.fillStyle = `rgb(${gv},${gv + 4},${gv + 6})`;
+      ctx.beginPath(); ctx.arc(x, y, dr * d.s, 0, 2 * Math.PI); ctx.fill();
+    }
+
+    // the hit: halo, echo rings, core
+    const pulse = (t % 2.6) / 2.6, haloR = dr * (7 + 3 * hitLit);
+    const halo = ctx.createRadialGradient(hx, hy, 0, hx, hy, haloR);
+    halo.addColorStop(0, `rgba(60,196,143,${.55 + .3 * hitLit})`); halo.addColorStop(1, 'rgba(60,196,143,0)');
+    ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(hx, hy, haloR, 0, 2 * Math.PI); ctx.fill();
+    ctx.lineWidth = 1.4;
+    for (const p of [pulse, (pulse + .5) % 1]){
+      ctx.strokeStyle = `rgba(60,196,143,${.7 * (1 - p)})`;
+      ctx.beginPath(); ctx.arc(hx, hy, dr * (1.6 + p * 7), 0, 2 * Math.PI); ctx.stroke();
+    }
+    ctx.fillStyle = '#3CC48F'; ctx.beginPath(); ctx.arc(hx, hy, dr * 1.45, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = 'rgba(220,255,238,.9)'; ctx.beginPath(); ctx.arc(hx - dr * .4, hy - dr * .4, dr * .45, 0, 2 * Math.PI); ctx.fill();
+
+    // leader line + label, pointing outward from the centre
+    const ang = Math.atan2(hy - cy, hx - cx), lx = hx + Math.cos(ang) * dr * 9, ly = hy + Math.sin(ang) * dr * 9;
+    const right = Math.cos(ang) >= 0, ex = lx + (right ? 18 : -18);
+    ctx.strokeStyle = 'rgba(60,196,143,.75)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(hx + Math.cos(ang) * dr * 3, hy + Math.sin(ang) * dr * 3); ctx.lineTo(lx, ly); ctx.lineTo(ex, ly); ctx.stroke();
+    ctx.font = `500 ${Math.max(10, S * .021)}px "JetBrains Mono", ui-monospace, monospace`;
+    ctx.fillStyle = '#3CC48F'; ctx.textAlign = right ? 'left' : 'right'; ctx.fillText('HIT', ex + (right ? 6 : -6), ly + 4);
+
+    // centre crosshair
+    ctx.strokeStyle = 'rgba(134,160,167,.5)'; ctx.beginPath();
+    ctx.moveTo(cx - 6, cy); ctx.lineTo(cx + 6, cy); ctx.moveTo(cx, cy - 6); ctx.lineTo(cx, cy + 6); ctx.stroke();
+  }
+
+  layout(); t = 1.3; draw();
+  animated(cv, document.getElementById('pico-toggle'), ['Pause', 'Play'], dt => { t += dt; draw(); });
+  onResize(() => { layout(); draw(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
+
+/* ==========================================================================
+   CONTACT: static generated emulsion behind the page
+   ========================================================================== */
+(() => {
+  const sec = document.querySelector('.contact'), cv = sec.querySelector('.contact-canvas');
+  function paint(){
+    const dpr = Math.min(2, window.devicePixelRatio || 1), W = sec.clientWidth, H = sec.clientHeight;
+    const lat = Emulsion.build({ width: W, height: H, R: W < 700 ? 16 : 24, seed: 42, cellP: .2, gap: 4 });
+    const tl = Emulsion.tile(lat, H, dpr, '#061117');
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    cv.getContext('2d').drawImage(tl, 0, 0, tl.width, tl.height, -lat.dx * dpr, 0, tl.width, tl.height);
+  }
+  onResize(paint);
+  paint();
+})();
+</script>
+</body>
+</html>
